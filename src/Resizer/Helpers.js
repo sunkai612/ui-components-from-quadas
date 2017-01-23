@@ -31,18 +31,31 @@ export default {
       preRightWidth: this.state.rightWidth,
       leftWidth: leftWidth,
       rightWidth: rightWidth,
-      leftOpened: leftWidth > 0
+      leftOpened: leftWidth > 0,
+      rightOpened: rightWidth > 0
     });
   },
 
   handleToggleV(visible) {
-    this.setState({
-      preLeftWidth: this.state.leftWidth,
-      preRightWidth: this.state.rightWidth,
-      leftWidth: visible ? this.initLeftWidth : 0,
-      rightWidth: visible ? this.initRightWidth : (this.initLeftWidth + this.initRightWidth),
-      leftOpened: visible
-    });
+    if (this.hiddenSide === 'right') {
+      this.setState({
+        preLeftWidth: this.state.leftWidth,
+        preRightWidth: this.state.rightWidth,
+        leftWidth: visible ? this.initLeftWidth : (this.initLeftWidth + this.initRightWidth),
+        rightWidth: visible ? this.initRightWidth : 0,
+        rightOpened: visible,
+        leftOpened: true
+      })
+    } else {
+      this.setState({
+        preLeftWidth: this.state.leftWidth,
+        preRightWidth: this.state.rightWidth,
+        leftWidth: visible ? this.initLeftWidth : 0,
+        rightWidth: visible ? this.initRightWidth : (this.initLeftWidth + this.initRightWidth),
+        leftOpened: visible,
+        rightOpened: true
+      });
+    }
   },
 
   bindWindowResizeHEvent(eventScope) {
@@ -59,7 +72,11 @@ export default {
       // Update width with new DOM width
       this.initLeftWidth = this.getInitLeftWidth();
       this.initRightWidth = this.getInitRightWidth();
-      this.handleToggleV(true);
+      if (this.hiddenSide === 'right') {
+        this.handleToggleV(this.state.rightOpened);
+      } else {
+        this.handleToggleV(this.state.leftOpened);
+      }
     }, 88));
   },
 

@@ -23,6 +23,7 @@ class VResizer extends Component {
         const offset = event.pageX - $resizer.offset().left - $resizer.width() / 2;
         let leftWidth = this.props.leftWidth + offset;
         let rightWidth = this.props.rightWidth - offset;
+
         if (leftWidth < this.props.minLeftWidth) {
           leftWidth = this.props.minLeftWidth;
           rightWidth = this.props.rightWidth + (this.props.leftWidth - this.props.minLeftWidth);
@@ -40,12 +41,22 @@ class VResizer extends Component {
       let rightWidth;
       e.preventDefault();
 
-      if (this.props.leftOpened) {
-        leftWidth = 0;
-        rightWidth = this.props.leftWidth + this.props.rightWidth;
+      if (this.props.hiddenSide === 'right') {
+        if (this.props.rightOpened) {
+          leftWidth = this.props.leftWidth + this.props.rightWidth;
+          rightWidth = 0;
+        } else {
+          leftWidth = this.props.preLeftWidth;
+          rightWidth = this.props.preRightWidth;
+        }
       } else {
-        leftWidth = this.props.preLeftWidth;
-        rightWidth = this.props.preRightWidth;
+        if (this.props.leftOpened) {
+          leftWidth = 0;
+          rightWidth = this.props.leftWidth + this.props.rightWidth;
+        } else {
+          leftWidth = this.props.preLeftWidth;
+          rightWidth = this.props.preRightWidth;
+        }
       }
       this.props.onResize(leftWidth, rightWidth);
     };
@@ -66,7 +77,7 @@ class VResizer extends Component {
 
   render() {
     return (
-      <div className="ui-layout-resizer ui-layout-resizer-vertical" ref="resizer" onMouseDown={this.handleMouseDown} style={{'float': 'left', width: '0.3%'}}>
+      <div className="ui-layout-resizer ui-layout-resizer-vertical" ref="resizer" onMouseDown={this.handleMouseDown} style={{'float': 'left'}}>
         <div className="ui-layout-resizer_toggler" onClick={this.handleClick} onMouseDown={this.stopPropagation}></div>
       </div>
     );
