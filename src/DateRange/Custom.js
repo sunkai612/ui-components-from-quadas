@@ -108,16 +108,21 @@ class CustomDialog extends Component{
         beforeShowDay(date) {
           let cssClasses = [];
           const selectedDate = datepicker.formatDate('yy/mm/dd', date);
-
-          if (selectedDate === self.state.startText) {
-            cssClasses.push('day-in-range');
-            cssClasses.push('day-start');
-          }
-          if (self.state.startText <= selectedDate && self.state.endText > selectedDate) {
-            cssClasses.push('day-in-range');
-          } else if (self.state.endText === selectedDate) {
-            cssClasses.push('day-in-range');
-            cssClasses.push('day-end');
+          if (self.state.startText) {
+            if (selectedDate === self.state.startText) {
+              cssClasses.push('day-in-range');
+              cssClasses.push('day-start');
+            }
+            if (self.state.startText <= selectedDate && self.state.endText > selectedDate) {
+              cssClasses.push('day-in-range');
+            } else if (self.state.endText === selectedDate) {
+              cssClasses.push('day-in-range');
+              cssClasses.push('day-end');
+            }
+          } else {
+            if (selectedDate === self.state.startText) {
+              cssClasses.push('day-start');
+            }
           }
           return [true, uniq(cssClasses).join(' ')];
         },
