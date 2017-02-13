@@ -93,7 +93,13 @@ class CustomDialog extends Component{
       const self = this;
       const $dialog = $('#date_range_custom_dialog');
       const $datepicker = $dialog.find('#date_range_datepicker');
-
+      let defaultDate;
+      if (self.state.focusOn === 'end' && self.state.endText) {
+        const twoMonthAgo = moment(self.state.endText).subtract(2, 'months').format('YYYY/MM/DD');
+        defaultDate = twoMonthAgo < self.state.startText ? self.state.startText : twoMonthAgo;
+      } else {
+        defaultDate = self.state.startText;
+      }
       // Foucs input
       $dialog.find(`input[name="${this.state.focusOn}"]`).trigger('focus');
       // Reset datepicker
@@ -104,7 +110,7 @@ class CustomDialog extends Component{
         showButtonPanel: false,
         utcOffset: self.props.utcOffset,
         minDate: self.state.focusOn === 'end' ? self.state.startText : '',
-        defaultDate: (self.state.focusOn === 'end' && self.state.endText) ? self.state.endText : self.state.startText,
+        defaultDate: defaultDate,
         beforeShowDay(date) {
           let cssClasses = [];
           const selectedDate = datepicker.formatDate('yy/mm/dd', date);
