@@ -126,7 +126,7 @@ class CustomDialog extends Component{
               cssClasses.push('day-end');
             }
           } else {
-            if (selectedDate === self.state.startText) {
+            if (selectedDate === self.state.endText) {
               cssClasses.push('day-start');
             }
           }
