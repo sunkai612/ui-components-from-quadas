@@ -137,6 +137,9 @@ class CustomDialog extends Component{
           return false;
         }
       });
+      if (self.state.focusOn === 'end') {
+        $datepicker.datepicker("option", "defaultDate", null);
+      }
     };
   }
 
