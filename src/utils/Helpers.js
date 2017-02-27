@@ -1,4 +1,5 @@
 import isNumber from 'lodash/lang/isNumber';
+import isString from 'lodash/lang/isString';
 import round from 'lodash/math/round';
 import isEmpty from 'lodash/lang/isEmpty';
 import map from 'lodash/collection/map';
@@ -46,8 +47,8 @@ export default {
     if (num == null) {
       return '0';
     }
-    // num is following float format
-    if (Number.parseInt(num, 10) !== Number.parseFloat(num)) {
+    // decimal
+    if (isString(num) && num.indexOf('.') > 0) {
       const [int, decimals] = num.split('.');
       return `${this.numberWithCommas(Number.parseInt(int, 10))}.${decimals}`;
     }
