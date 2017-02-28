@@ -21,12 +21,10 @@ export default {
       }
       if (obj.dir) {
         let dir;
-        if (obj.dir === 1) {
-          dir = 'asc';
-        } else if (obj.dir === -1) {
+        if (obj.dir === -1 || obj.dir === 'desc') {
           dir = 'desc';
         } else {
-          dir = obj.dir;
+          dir = 'asc';
         }
         return `${obj.name},${dir}`;
       }
