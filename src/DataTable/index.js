@@ -66,22 +66,20 @@ class DataTable extends Component {
     };
 
     this.handleSortChange = (sortInfo) => {
-      const _sortInfo = last(sortInfo) || {};
-      // nextSortInfo for func onPageChange is a string, e.g. 'id,desc'
-      let nextSortInfo = Helpers.stringifySort([_sortInfo]);
-      // this.props.sortInfo is an array of object, e.g. [{name: 'id', dir: 'desc'}]
       const preSortInfo = this.props.sortInfo[0];
-
-      // sort dir only need asc and desc
-      if (!nextSortInfo && preSortInfo) {
-        const dir = preSortInfo.dir === 'asc' ? 'desc' : 'asc';
-        nextSortInfo = `${preSortInfo.name},${dir}`;
+      const nextSortInfo = last(sortInfo) || preSortInfo;
+      if (sortInfo.length === 0) { // resort the same column and dir is asc
+        nextSortInfo.dir = 'asc';
+      } else {
+        if (preSortInfo.name !== nextSortInfo.name) {
+          // sort not equal name, then sort dir default desc
+          nextSortInfo.dir = 'desc';
+        }
       }
-
-      this.handlePageChange({order: nextSortInfo});
+      this.handlePageChange({order: Helpers.stringifySort([nextSortInfo])});
       // Send out new sort info
       if (this.props.onStatusChange) {
-        this.props.onStatusChange({sort: _sortInfo});
+        this.props.onStatusChange({sort: nextSortInfo});
       }
     };
 
