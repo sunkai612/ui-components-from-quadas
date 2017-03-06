@@ -1,4 +1,4 @@
-import map from 'lodash/collection/map';
+  import map from 'lodash/collection/map';
 import pick from 'lodash/object/pick';
 import last from 'lodash/array/last';
 import isEqual from 'lodash/lang/isEqual';
@@ -50,10 +50,6 @@ class DataTable extends Component {
     };
 
     this.handleColumnOrderChange = (index, dropIndex) => {
-      if (this.props.selectable) {
-        index -= 1;
-        dropIndex -= 1;
-      }
       const col = this.columns[index];
       const reorderable = col.reorderable;
       if (reorderable === false) {
