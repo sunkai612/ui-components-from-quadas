@@ -172,6 +172,7 @@ class AllList extends Component {
         width: 30,
         sortable: false,
         resizable: false,
+        reorderable: false,
         style: { textAlign: 'center' },
         render: (value, data) => {
           const parentId = this.props.dataTableProps.query.parent_id;
