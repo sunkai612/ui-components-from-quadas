@@ -41,6 +41,7 @@ class DataTable extends Component {
         title: <input type="checkbox" id="select_all" onChange={this.handleCheckAll} checked={this.props.dataSource.length !== 0 && this.props.selectedIds && this.props.selectedIds.length === this.props.dataSource.length}/>,
         sortable: false,
         resizable: false,
+        reorderable: false,
         style: { textAlign: 'center' },
         render: (value, data) => {
           return <input data-record-id={data[this.props.idProperty]} type="checkbox" checked={this.props.selectedIds.indexOf(data[this.props.idProperty]) !== -1} onChange={this.handleCheck.bind(this, data[this.props.idProperty])} />;
@@ -49,11 +50,10 @@ class DataTable extends Component {
     };
 
     this.handleColumnOrderChange = (index, dropIndex) => {
-      if (this.props.selectable) {
-        index -= 1;
-        dropIndex -= 1;
-      }
       const col = this.columns[index];
+      if (col.reorderable === false) {
+        return;
+      }
       this.columns.splice(index, 1); // delete from index, 1 item
       this.columns.splice(dropIndex, 0, col);
       this.setState({});
