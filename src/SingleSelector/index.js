@@ -19,6 +19,7 @@ class SingleSelector extends Component {
       title: ' ',
       sortable: false,
       resizable: false,
+      reorderable: false,
       width: 30,
       style: { textAlign: 'center' },
       render: (value, data) => {
