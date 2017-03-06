@@ -18,6 +18,7 @@ class SingleSelector extends Component {
       name: 'radio',
       title: ' ',
       sortable: false,
+      resizable: false,
       width: 30,
       style: { textAlign: 'center' },
       render: (value, data) => {
