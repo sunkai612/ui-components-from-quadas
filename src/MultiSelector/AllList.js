@@ -171,6 +171,7 @@ class AllList extends Component {
         title: <i className={classNames('fa fa-check-circle fa-lg', {'text-success': this.isCheckedAll()})} onClick={this.handleCheckAll} />,
         width: 30,
         sortable: false,
+        resizable: false,
         style: { textAlign: 'center' },
         render: (value, data) => {
           const parentId = this.props.dataTableProps.query.parent_id;
