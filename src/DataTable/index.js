@@ -40,6 +40,7 @@ class DataTable extends Component {
         width: 30,
         title: <input type="checkbox" id="select_all" onChange={this.handleCheckAll} checked={this.props.dataSource.length !== 0 && this.props.selectedIds && this.props.selectedIds.length === this.props.dataSource.length}/>,
         sortable: false,
+        resizable: false,
         style: { textAlign: 'center' },
         render: (value, data) => {
           return <input data-record-id={data[this.props.idProperty]} type="checkbox" checked={this.props.selectedIds.indexOf(data[this.props.idProperty]) !== -1} onChange={this.handleCheck.bind(this, data[this.props.idProperty])} />;
