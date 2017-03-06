@@ -50,8 +50,12 @@ class DataTable extends Component {
     };
 
     this.handleColumnOrderChange = (index, dropIndex) => {
+      if (this.props.selectable) {
+        index -= 1;
+        dropIndex -= 1;
+      }
       const col = this.columns[index];
-      if (col.reorderable === false) {
+      if (!col || col.reorderable === false) {
         return;
       }
       this.columns.splice(index, 1); // delete from index, 1 item
