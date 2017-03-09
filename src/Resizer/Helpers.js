@@ -41,7 +41,7 @@ export default {
       this.setState({
         preLeftWidth: this.state.leftWidth,
         preRightWidth: this.state.rightWidth,
-        leftWidth: visible ? this.initLeftWidth : (this.initLeftWidth + this.initRightWidth),
+        leftWidth: visible ? this.initLeftWidth : (this.initLeftWidth + this.initRightWidth + this.initResizerVerticalWidth),
         rightWidth: visible ? this.initRightWidth : 0,
         rightOpened: visible,
         leftOpened: true
