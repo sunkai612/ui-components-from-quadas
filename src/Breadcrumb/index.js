@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Link from 'react-router/lib/Link';
 
 const BreadcrumbItem = (props) => (
@@ -22,5 +22,9 @@ const Breadcrumb = (props) => (
 );
 
 Breadcrumb.BreadcrumbItem = BreadcrumbItem;
+
+Breadcrumb.propTypes = {
+  text: PropTypes.string
+};
 
 export default Breadcrumb;
