@@ -5,10 +5,17 @@ const BreadcrumbItem = (props) => (
   <li {...props}>{props.children}</li>
 );
 
+const HomeLink = (props) => {
+  if (props.text) {
+    return <Link to="/">{props.text}</Link>;
+  }
+  return <Link to="/"><i className="fa fa-home"></i></Link>;
+};
+
 const Breadcrumb = (props) => (
   <ol className="breadcrumb">
-    <BreadcrumbItem className="bc__home">
-      <Link to="/"><i className="fa fa-home"></i></Link>
+    <BreadcrumbItem className={props.text ? 'bc__fullview' : 'bc__home'}>
+      <HomeLink text={props.text} />
     </BreadcrumbItem>
     {props.children}
   </ol>
