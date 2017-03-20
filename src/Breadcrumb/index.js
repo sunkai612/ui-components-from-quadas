@@ -24,7 +24,8 @@ const Breadcrumb = (props) => (
 Breadcrumb.BreadcrumbItem = BreadcrumbItem;
 
 Breadcrumb.propTypes = {
-  text: PropTypes.string
+  text: PropTypes.string,
+  title: PropTypes.string
 };
 
 export default Breadcrumb;
