@@ -70,15 +70,16 @@ class ActionDialog extends Component{
               scrollbarSize={0}
               rowHeight={this.props.rowHeight}
             />
-            <div className="panel-footer text-right">
-              <Pagination
-                offset={this.state.offset}
-                limit={this.state.limit}
-                total={this.props.dataSource.length}
-                onPageChange={this.handlePageChange}
-                pageSizes={false}
-              />
-            </div>
+            {this.props.pager && (
+               <div className="panel-footer text-right">
+                 <Pagination
+                    offset={this.state.offset}
+                    limit={this.state.limit}
+                    total={this.props.dataSource.length}
+                    onPageChange={this.handlePageChange}
+                    pageSizes={false}
+                 />
+               </div>)}
           </div>
           {this.props.childPosition === 'bottom' ? this.props.children : null}
         </Modal.Body>
@@ -113,7 +114,8 @@ ActionDialog.propTypes = {
   footerClassName: PropTypes.string,
   bsSize: PropTypes.string,
   rowHeight: PropTypes.number,
-  childPosition: PropTypes.string
+  childPosition: PropTypes.string,
+  pager: PropTypes.bool
 };
 
 ActionDialog.defaultProps = {
@@ -129,7 +131,8 @@ ActionDialog.defaultProps = {
   footerClassName: 'modal-footer',
   bsSize: 'medium',
   bodyStyle: {},
-  childPosition: 'top'
+  childPosition: 'top',
+  pager: true
 };
 
 export default ActionDialog;
